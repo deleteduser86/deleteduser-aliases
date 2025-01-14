@@ -1,0 +1,305 @@
+## Personal Aliases For Arch-Linux
+#alias update_all='time sh -c "pacman -Syu ; tldr -u && updatedb ; neofetch && sleep 0.5 && \cpufetch && echo -e \"\033[94mPackages updated and upgraded successfully\033[0m\""'
+alias count='ls -1 | wc -l'                                       alias reboot='source ~/.zshrc'
+alias rmv='rm --verbose -i'
+alias fetch='neofetch && sleep 0.5 && cpufetch'
+alias myenv='source myenv/bin/activate'                           alias banner='clear && bash ~/.banner.sh ${cols} ${TNAME}'
+alias nano='nano --softwrap -l'
+alias search='function _searcher() {
+    if [[ $# -eq 0 ]]; then
+        echo "Usage: searcher <search-term>"
+        return 1
+    fi
+
+    # Using find to search for files and directories
+    echo "### Using find ###"
+    find / -iname "*$1*"
+
+    # Using locate for faster searching (requires updatedb)
+    echo "### Using locate ###"
+    locate "$1"
+
+    # Using whereis to find binary locations
+    echo "### Using whereis ###"
+    whereis "$1"
+}; _searcher'
+alias search4='function _searcher() {
+    if [[ $# -eq 0 ]]; then
+        echo "Usage: search <search-term>"
+        return 1
+    fi
+
+    # Using find to search for files and directories
+    echo "### Using find ###"
+    sudo find / -iname "*$1*"
+
+    # Using locate for faster searching (requires updatedb)
+    echo "### Using locate ###"
+    locate "$1"
+
+    # Using whereis to find binary locations
+    echo "### Using whereis ###"
+    whereis "$1"
+}; _searcher'
+
+
+
+
+##Personal aliases
+#alias update_all='time sh -c "pkg update && pkg upgrade -y ; tldr -u && updatedb ; neofetch && sleep 0.5 && cpufetch && echo -e \"\033[94mPackages updated and upgraded successfully\033[0m\""'
+#alias update_all='time sh -c "pkg update && pkg upgrade -y ; updatedb && tldr -u ; neofetch && sleep 0.5 && cpufetch && echo -e \"\033[94mPackages updated and upgraded successfully\033[0m\""'
+alias update_all='time sh -c "pkg --check-mirror update && pkg update && pkg upgrade -y ; updatedb && tldr --upgrade ; neofetch && sleep 0.5 && cpufetch && rxfetch && echo  \"Packages updated and upgraded successfully\" | lolcat" && date +%c'
+alias count='ls -1 | wc -l'
+alias reboot='source ~/.zshrc'
+#alias reboot='source ~/.zshrc'
+alias rm='rm --verbose -i'
+alias fetch='neofetch && sleep 0.5 && cpufetch'
+alias myenv='source myenv/bin/activate'
+#For use with zsh/og-my-zsh
+alias banner='clear && bash ~/.banner.sh ${cols} ${TNAME}'
+alias nano='nano --softwrap -l'
+# Define the search function
+function _searcher() {
+    if [[ $# -lt 1 ]]; then
+        echo "Usage: search <search-term> [sudo]"
+        return 1
+    fi
+
+    local search_term="$1"
+    local use_sudo=""
+
+    if [[ "$2" == "sudo" ]]; then
+        use_sudo="sudo"
+    fi
+
+    echo "### Searching for '$search_term' ###"
+
+    # Using find to search for files and directories
+    echo "### Using find ###"
+    if command -v find &> /dev/null; then
+        $use_sudo find / -iname "*$search_term*"
+    else
+        echo "Error: find command not found"
+    fi
+
+    # Using locate for faster searching (requires updatedb)
+    echo "### Using locate ###"
+    if command -v locate &> /dev/null; then
+        locate "$search_term"
+    else
+        echo "Error: locate command not found"
+    fi
+
+    # Using whereis to find binary locations
+    echo "### Using whereis ###"
+    if command -v whereis &> /dev/null; then
+        whereis "$search_term"
+    else
+        echo "Error: whereis command not found"
+    fi
+}
+
+# Create alias for the search function
+alias search='_searcher'
+alias search4='_searcher sudo'
+## UPON BOOT ##
+#update_all && myenv
+
+
+
+
+## FOR LINUX PC ONLY ##
+#alias update='apt update ; apt upgrade -y || sudo dpkg --configure -a && apt update ; apt upgrade -y ; apt autoremove ; updatedb ; neofetch
+#alias update='time sh -c 'pkg update && pkg upgrade -y ; pkg autoclean ; tldr -u && updatedb ; neofetch && echo -e "\033[94mPackages updated and upgraded successfully\033[0m"''
+alias apt='sudo apt'
+alias fetch='neofetch ; cpufetch'
+
+#alias update='time sh -c 'pkg update && pkg upgrade -y ; pkg auto>
+alias count='ls -1 | wc -l'
+alias reboot='source ~/.zshrc'
+alias rm='rm --verbose -i'
+alias fetch='neofetch ; cpufetch'
+
+## PERSONAL ALIASES .BASHRC '$SHELL'; ARCH-LINUX ONLY ##
+alias update_all='time sh -c "pacman -Syu ; tldr -u && updatedb ; neofetch && sleep 0.5 && \cpufetch && echo -e \"\033[94mPackages updated and upgraded successfully\033[0m\""'
+alias count='ls -1 | wc -l'
+alias reboot='source ~/.zshrc'
+alias rmv='rm --verbose -i'
+alias fetch='neofetch && sleep 0.5 && cpufetch'
+alias myenv='source myenv/bin/activate'
+alias banner='clear && bash ~/.banner.sh ${cols} ${TNAME}'
+alias nano='nano --softwrap -l'
+alias search='function _searcher() {
+    if [[ $# -eq 0 ]]; then
+        echo "Usage: searcher <search-term>"
+        return 1
+    fi
+
+    # Using find to search for files and directories
+    echo "### Using find ###"
+    find / -iname "*$1*"
+
+    # Using locate for faster searching (requires updatedb)
+    echo "### Using locate ###"
+    locate "$1"
+
+    # Using whereis to find binary locations
+    echo "### Using whereis ###"
+    whereis "$1"
+}; _searcher'
+alias search4='function _searcher() {
+    if [[ $# -eq 0 ]]; then
+        echo "Usage: search <search-term>"
+        return 1
+    fi
+
+    # Using find to search for files and directories
+    echo "### Using find ###"
+    sudo find / -iname "*$1*"
+
+    # Using locate for faster searching (requires updatedb)
+    echo "### Using locate ###"
+    locate "$1"
+
+    # Using whereis to find binary locations
+    echo "### Using whereis ###"
+    whereis "$1"
+}; _searcher'
+
+## PERSONAL ALIASES; .ZSCHRC '$SHELL' ONLY ##
+alias update_all=alias update_all='time sh -c "pkg update && pkg upgrade -y ; tldr -u && updatedb ; neofetch && sleep 0.5 && \cpufetch && echo -e \"\033[94mPackages updated and upgraded successfully\033[0m\""'
+alias count='ls -1 | wc -l'
+alias reboot='source ~/.zshrc'
+alias rm='rm --verbose -i'
+alias fetch='neofetch && sleep 0.5 && cpufetch'
+alias myenv='source myenv/bin/activate'
+alias pmyenv=
+alias banner='clear && bash ~/.banner.sh ${cols} ${TNAME}'
+alias nano='nano --softwrap -l'
+alias search='function _searcher() {
+    if [[ $# -eq 0 ]]; then
+        echo "Usage: searcher <search-term>"
+        return 1
+    fi
+
+    # Using find to search for files and directories
+    echo "### Using find ###"
+    find / -iname "*$1*"
+
+    # Using locate for faster searching (requires updatedb)
+    echo "### Using locate ###"
+    locate "$1"
+
+    # Using whereis to find binary locations
+    echo "### Using whereis ###"
+    whereis "$1"
+}; _searcher'
+alias search4='function _searcher() {
+    if [[ $# -eq 0 ]]; then
+        echo "Usage: search <search-term>"
+        return 1
+    fi
+
+    # Using find to search for files and directories
+    echo "### Using find ###"
+    sudo find / -iname "*$1*"
+
+    # Using locate for faster searching (requires updatedb)
+    echo "### Using locate ###"
+    locate "$1"
+
+    # Using whereis to find binary locations
+    echo "### Using whereis ###"
+    whereis "$1"
+}; _searcher'
+
+## FOR CUSTOM KEYBOARD .termux/termux.properties ##
+extra-keys = [ \
+ ['q','F1','F2','F3','F4','F5','UP',{key: KEYBOARD, popup: {macro: "CTRL d", display: '⌧'}}], \
+ ['F6','F7','F8','F9','F10','LEFT','DOWN','RIGHT'], \
+ ['F11','F12','c','CTRL','x','DEL','BKSP','PGUP'], \
+ ['HOME','END','TAB','y','logout','history','ENTER','PGDN'] \]
+
+-='cd -'
+...=../..
+....=../../..
+.....=../../../..
+......=../../../../..
+1='cd -1'
+2='cd -2'
+3='cd -3'
+4='cd -4'
+5='cd -5'
+6='cd -6'
+7='cd -7'
+8='cd -8'
+9='cd -9'
+_='sudo '
+archive='web_search archive'
+ask='web_search ask'
+baidu='web_search baidu'
+banner='clear && bash ~/.banner.sh ${cols:-80} ${TNAME:-"Welcome"}'
+bing='web_search bing'
+brs='web_search brave'
+chatgpt='web_search chatgpt'
+convertWebp2jpg='bash convertWebp2jpg.sh'
+count='ls -1 | wc -l'
+cp='cp -i'
+ddg='web_search duckduckgo'
+deepl='web_search deepl'
+dockerhub='web_search dockerhub'
+ducky='web_search duckduckgo \!'
+ecosia='web_search ecosia'
+egrep='grep -E'
+fgrep='grep -F'
+file_audit=$'for file in *; do \\\n  if [ -f "$file" ]; then \\\n    echo "=== $file ==="; \\\n    if [ -s "$file" ]; then \\\n      case "$file" in \\\n        *.md) glow "$file" 2>/dev/null || echo "[Permission Denied]";; \\\n        *) cat "$file" 2>/dev/null || echo "[Permission Denied]";; \\\n      esac; \\\n    else \\\n      echo "[Empty File]"; \\\n    fi; \\\n    echo; \\\n  else \\\n    echo "=== $file ==="; \\\n    echo "[Skipped: Not a file]"; \\\n    echo; \\\n  fi; \\\ndone'
+file_audit2=$'for file in *; do \\\\\\n  \\\n  if [ -f "$file" ]; then \\\\\\n    \\\n    echo "=== $file ==="; \\\\\\n    \\\n    if [ -s "$file" ]; then \\\\\\n      \\\n      case "$file" in \\\\\\n        \\\n        *.md) glow "$file" 2>/dev/null || echo "[Permission Denied]";; \\\\\\n        \\\n        *) cat "$file" 2>/dev/null || echo "[Permission Denied]";; \\\\\\n      \\\n      esac; \\\\\\n    \\\n    else \\\\\\n      \\\n      echo "[Empty File]"; \\\\\\n    \\\n    fi; \\\\\\n    \\\n    echo; \\\\\\n  \\\n  elif [ -d "$file" ]; then \\\\\\n    \\\n    echo "=== $file ==="; \\\\\\n    \\\n    echo "[Directory Detected]"; \\\\\\n    \\\n    num_files=$(find "$file" -maxdepth 1 -type f | wc -l); \\\\\\n    \\\n    total_files=$(find "$file" -type f | wc -l); \\\\\\n    \\\n    echo "Files at top level: $num_files"; \\\\\\n    \\\n    echo "Files recursively: $total_files"; \\\\\\n    \\\n    echo; \\\\\\n  \\\n  elif [ -L "$file" ]; then \\\\\\n    \\\n    echo "=== $file ==="; \\\\\\n    \\\n    echo "[Symbolic Link Detected]"; \\\\\\n    \\\n    link_target=$(readlink "$file"); \\\\\\n    \\\n    echo "Points to: $link_target"; \\\\\\n    \\\n    echo; \\\\\\n  \\\n  else \\\\\\n    \\\n    echo "=== $file ==="; \\\\\\n    \\\n    echo "[Skipped: Not a file]"; \\\\\\n    \\\n    echo; \\\\\\n  \\\ndone'
+github='web_search github'
+givero='web_search givero'
+globurl='noglob urlglobber '
+goodreads='web_search goodreads'
+google='web_search google'
+gopkg='web_search gopkg'
+grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv}'
+guide=format_guide
+history='omz_history -f'
+image='web_search duckduckgo \!i'
+l='ls --color=auto'
+l.='ls --color=auto -d .*'
+la='ls --color=auto -a'
+ll='ls --color=auto -Fhl'
+ll.='ls --color=auto -Fhl -d .*'
+ln='ln -i'
+ls=eza
+lsa='ls -lah'
+map='web_search duckduckgo \!m'
+md='mkdir -p'
+mv='mv -i'
+nano='nano --softwrap --linenumbers'
+news='web_search duckduckgo \!n'
+npmpkg='web_search npmpkg'
+packagist='web_search packagist'
+qwant='web_search qwant'
+rd=rmdir
+reboot='source ~/.zshrc'
+reboot2='source ~/.bashrc'
+reddit='web_search reddit'
+rm='rm -i'
+run-help=man
+scholar='web_search scholar'
+search=$'function _searcher() {\n    if [[ $# -eq 0 ]]; then\n        echo "Usage: search <search-term> [optional-path]"\n        return 1\n    fi\n\n    SEARCH_TERM="$1"\n    SEARCH_PATH="${2:-/}" # Default search path to root if not provided\n\n    echo -e "\\n$(tput setaf 3)### Using find ###$(tput sgr0)"\n    if command -v find &>/dev/null; then\n        sudo find "$SEARCH_PATH" -iname "*$SEARCH_TERM*" 2>/dev/null | grep --color=always "$SEARCH_TERM" || echo "No results found with find."\n    else\n        echo "find command not available."\n    fi\n\n    echo -e "\\n$(tput setaf 3)### Using locate ###$(tput sgr0)"\n    if command -v locate &>/dev/null; then\n        locate "$SEARCH_TERM" | grep --color=always "$SEARCH_TERM" || echo "No results found with locate."\n    else\n        echo "locate command not available. Please install mlocate and run updatedb."\n    fi\n\n    echo -e "\\n$(tput setaf 3)### Using whereis ###$(tput sgr0)"\n    if command -v whereis &>/dev/null; then\n        whereis "$SEARCH_TERM" | grep --color=always "$SEARCH_TERM" || echo "No results found with whereis."\n    else\n        echo "whereis command not available."\n    fi\n}; _searcher'
+sp='web_search startpage'
+stackoverflow='web_search stackoverflow'
+timgloop='for file in *; do [ -f "$file" ] && timg -p q -W -- "$file" && echo "Filename: $file"; done'
+timgslide='for img in *.jpg *.webp *.png *.gif *.jpeg; do echo "$img"; timg -pq -W "$img"; done'
+viewimages='find . -maxdepth 1 -type f -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.gif" | while read -r img; do echo -n "$img: "; timg -- "$img" && printf "\n"; done'
+which-command=whence
+wiki='web_search duckduckgo \!w'
+wolframalpha='web_search wolframalpha'
+yahoo='web_search yahoo'
+yandex='web_search yandex'
+youtube='web_search youtube'
+zshconfig='mate ~/.zshrc'
+         
+## FOR THE BIRDS ##
+💩🚨👮‍♀🚫🚓⛔👮‍♂️🚨💩
